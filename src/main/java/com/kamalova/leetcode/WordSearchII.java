@@ -2,6 +2,13 @@ package com.kamalova.leetcode;
 
 import java.util.*;
 
+/*
+Success (but very slow! and heavy!)
+Details 
+Runtime: 143 ms, faster than 26.68% of Java online submissions for Word Search II. 
+Memory Usage: 58.4 MB, less than 5.00% of Java online submissions for Word Search II.
+*/
+
 public class WordSearchII {
 
     Map<Character, List<Pair>> map = new HashMap<>();
