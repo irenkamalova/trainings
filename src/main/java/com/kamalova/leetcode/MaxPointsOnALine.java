@@ -1,86 +1,53 @@
 package com.kamalova.image;
 
 import java.util.*;
+import java.math.*;
 
-// can't pass
+/*
+Took idea from discussions
+Success
+Details 
+Runtime: 36 ms, faster than 16.80% of Java online submissions for Max Points on a Line.
+Memory Usage: 36.3 MB, less than 86.63% of Java online submissions for Max Points on a Line.
+    */
 class MaxPointsOnALine {
 
-
     public int maxPoints(int[][] points) {
-        if (points.length == 1) return 1;
+        if (points.length < 3) return points.length;
+        int result = 0;
 
-
-        Map<Line, Set<int[]>> map = new HashMap<>();
-        for (int i = 0; i < points.length - 1; i++) {
+        //int result = 0;
+        for(int i = 0; i < points.length; i++){
+            HashMap<BigDecimal, Integer> hm = new HashMap<>();
             int p0x = points[i][0];
             int p0y = points[i][1];
-            for (int j = 1; j < points.length; j++) {
-                int p1x = points[j][0];
-                int p1y = points[j][1];
-                if ((p0x == p1x) && (p0y == p1y) && !map.isEmpty()) {
-                    for (Map.Entry<Line, Set<int[]>> entry : map.entrySet()) {
-                        Line l = entry.getKey();
-                        Set<int[]> set = entry.getValue();
-                        if (p0y == (int) (l.a * p0x + l.b)) {
-                            set.add(points[j]);
-                        } else if (l.x != 0 && p0x == l.x) {
-                            set.add(points[j]);
-                        }
+            int samex = 1;
+            int samep = 0;
+            for(int j = 0; j < points.length; j++){
+                if(j != i) {
+                    int p1x = points[j][0];
+                    int p1y = points[j][1];
+                    if((p1x == p0x) && (p1y == p0y)){
+                        samep++;
                     }
-                } else {
-                    Line line = getLine(p0x, p0y, p1x, p1y);
-                    map.computeIfAbsent(line, l -> new HashSet<int[]>());
-                    map.get(line).add(points[i]);
-                    map.get(line).add(points[j]);
+                    if(p1x == p0x){
+                        samex++;
+                        continue;
+                    }
+                    BigDecimal ky = BigDecimal.valueOf(p1y - p0y);
+                    BigDecimal kx = BigDecimal.valueOf(p1x - p0x);
+                    BigDecimal k = ky.divide(kx,34, RoundingMode.HALF_EVEN);
+
+                    if(hm.containsKey(k)){
+                        hm.put(k,hm.get(k) + 1);
+                    }else{
+                        hm.put(k, 2);
+                    }
+                    result = Math.max(result, hm.get(k) + samep);
                 }
             }
+            result = Math.max(result, samex);
         }
-        int max = 0;
-        for (Map.Entry<Line, Set<int[]>> entry : map.entrySet()) {
-            if (entry.getValue().size() > max) {
-                max = entry.getValue().size();
-            }
-        }
-        return max;
-    }
-
-    private Line getLine(int x0, int y0, int x1, int y1) {
-        if (x1 - x0 == 0) {
-            return new Line(x1);
-        }
-        double a = (double) (((long) (y1 - y0)) / (double) ((long) (x1 - x0)));
-        double b = y1 - a * x1;
-        return new Line(a, b);
-    }
-
-    private class Line {
-        double a, b;
-        int x;
-
-        Line(double a, double b) {
-            this.a = a;
-            this.b = b;
-            this.x = 0;
-        }
-
-        Line(int x) {
-            this.a = 0;
-            this.b = 0;
-            this.x = x;
-        }
-
-        @Override
-        public boolean equals(Object o) {
-            if (o == null) return false;
-            if (o instanceof Line) {
-                Line l = (Line) o;
-                return (this.a == l.a) && (this.b == l.b) && (this.x == l.x);
-            } else return false;
-        }
-
-        @Override
-        public int hashCode() {
-            return (int) a + (int) b;
-        }
+        return result;
     }
 }
