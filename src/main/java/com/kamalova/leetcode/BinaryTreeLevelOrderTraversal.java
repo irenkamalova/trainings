@@ -2,6 +2,15 @@ package kamalova.com.leetcode;
 
 import java.util.*;
 
+/*
+Success
+Details 
+Runtime: 33 ms, faster than 5.45% of Java online submissions for Binary Tree Level Order Traversal.
+Memory Usage: 35.4 MB, less than 98.97% of Java online submissions for Binary Tree Level Order Traversal.
+
+Result: slow, but didn't use any hint from IDE and accepted all test cases from the first submission :)
+*/
+
 class BinaryTreeLevelOrderTraversal {
     Map<Integer, List<Integer>> map = new TreeMap<Integer, List<Integer>>();
     Map<TreeNode, Integer> depths = new HashMap<>();
