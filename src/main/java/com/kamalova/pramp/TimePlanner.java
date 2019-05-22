@@ -5,37 +5,21 @@ import java.util.*;
 
 class TimePlanner {
   
-  
-  static int[] meetingPlanner(int[][] slotsA, int[][] slotsB, int dur) {
-    // O(N + M) N - slotA.l M - slotsB
-    if (slotsA.length == 0 || slotsB.length == 0) return new int[]{};
-    
-    int i = 0;
-    int j = 0;
-    int[] pA = slotsA[i];
-    int[] pB = slotsB[j];
-    
+  public int[] meetingPlanner(int[][] slotsA, int[][] slotsB, int dur) {
+    // O(N + M) N - slotA.l M - slotsB    
+    int i = 0, j = 0;    
     while (i < slotsA.length && j < slotsB.length) {
-      int start = Math.max(pA[0], pB[0]);
-      int end = Math.min(pA[1], pB[1]);
+      int start = Math.max(slotsA[i][0], slotsB[j][0]);
+      int end = Math.min(slotsA[i][1], slotsB[j][1]);
       
       if (end - start >= dur) return new int[]{start, start + dur};
-      
-      if (pA[1] < pB[1]) {
+            
+      if (slotsA[i][1] < slotsB[j][1]) {
         i++;
-        if (i < slotsA.length) {
-          pA = slotsA[i];
-        } else return new int[]{};
       } else {
         j++;
-       if (j < slotsB.length) {
-          pB = slotsB[j];
-        } else return new int[]{};
       }
-      
     }
-    
-    return new int[]{};
-    
-  }
+    return new int[]{};   
+  } 
 }
