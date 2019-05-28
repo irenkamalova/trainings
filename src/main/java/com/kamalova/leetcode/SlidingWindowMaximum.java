@@ -26,4 +26,30 @@ class SlidingWindowMaximum {
         }
         return max;
     }
+    
+    /*
+    Details 
+    Runtime: 39 ms, faster than 19.86% of Java online submissions for Sliding Window Maximum.
+    Memory Usage: 40.2 MB, less than 86.63% of Java online submissions for Sliding Window Maximum.
+    */
+    public int[] maxSlidingWindow2(int[] nums, int k) {
+        int N = nums.length;
+        if (N == 0 || k == 0) return new int[0];
+        int[] result = new int[N - k + 1];
+        
+        // with prioprity queue
+        PriorityQueue<Integer> set = new PriorityQueue<Integer>(k, Collections.reverseOrder());
+        for (int i = 0; i < k; i++) {
+            set.add(nums[i]);
+        }
+        result[0] = set.peek();
+        
+        for (int i = 1; i < N - k + 1; i++) {
+            set.remove(nums[i - 1]);
+            set.add(nums[i + k - 1]);
+            result[i] = set.peek();
+        }
+        return result;
+    }
+
 }
