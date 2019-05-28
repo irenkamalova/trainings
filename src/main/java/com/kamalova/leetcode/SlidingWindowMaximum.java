@@ -51,5 +51,43 @@ class SlidingWindowMaximum {
         }
         return result;
     }
+    
+    /*
+    Success
+Details 
+Runtime: 11 ms, faster than 56.08% of Java online submissions for Sliding Window Maximum.
+Memory Usage: 40.3 MB, less than 85.82% of Java online submissions for Sliding Window Maximum.
+Get idea from discussions.
+    */
+    public int[] maxSlidingWindow3(int[] nums, int k) {
+        int N = nums.length;
+        if (N == 0 || k == 0) return new int[0];
+        int[] result = new int[N - k + 1];
+        
+        LinkedList<Integer> l = new LinkedList<>();
+        
+        for (int i = 0; i < k; i++) {
+            insert(l, nums[i]);
+        }
+        result[0] = l.peekFirst();
+        
+        for (int i = 1; i < N - k + 1; i++) {
+            
+            if (l.peekFirst() == nums[i - 1]) {
+                l.removeFirst();
+            }
+            insert(l, nums[i + k - 1]);
+            result[i] = l.peekFirst();
+
+        }
+        return result;
+    }
+    
+    private void insert(LinkedList<Integer> l, int number) {
+        while(!l.isEmpty() && l.peekLast() < number) {
+            l.removeLast();
+        }
+        l.add(number);
+    }
 
 }
