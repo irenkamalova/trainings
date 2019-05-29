@@ -1,48 +1,48 @@
 package com.kamalova.leetcode;
 
+import java.util.*;
+/*
+The general idea the same as it was - memoization result in map <String, List<String>>
+
+Edit: return result and use it in previous step 
+
+More accuracy code
+Good result:
+
+Success
+Details 
+Runtime: 4 ms, faster than 96.29% of Java online submissions for Word Break II.
+Memory Usage: 35.4 MB, less than 99.41% of Java online submissions for Word Break II.
+
+*/
+
 class WordBreakII {
-    /*
-    Trying to cache result in map
-    But still Status: Time Limit Exceeded
-    */
-    List<String> result = new ArrayList<>();
     HashMap<String, List<String>> map = new HashMap<>();
 
     public List<String> wordBreak(String s, List<String> wordDict) {
-        helper(s, wordDict, "");
-        return result;
+        return helper(s, wordDict);
     }
 
-void helper(String s, List<String> wordDict,
-                String res) {
+    List<String> helper(String s, List<String> wordDict) {
         if (map.containsKey(s)) {
-            List<String> previousResults = map.get(s);
-            for(String s1 : previousResults) {
-                result.add(res + s1);
-            }
-            return;
+            return map.get(s);
         }
+
+        if (s.length() == 0) {
+            return new ArrayList<String>(){{add("");}};
+        }
+        List<String> result = new ArrayList<>();
+
         for (String word : wordDict) {
-            if ((s.length() >= word.length()) &&
-                    s.substring(0, word.length()).equals(word)) {
-                if (s.length() != word.length()) {
-                    String r = res + word + " ";
-                    String key = s.substring(word.length());
-                    helper(key, wordDict, r);
-                    if (map.containsKey(key)) {
-                        List<String> previousResults = map.get(key);
-                        map.computeIfAbsent(s, k -> new ArrayList<>());
-                        for (String s1 : previousResults) {
-                            map.get(s).add(word + " " + s1);
-                        }
-                    }
-                } else {
-                    List<String> lr = new ArrayList<String>() {{add(word);}};
-                    map.put(word, lr);
-                    result.add(res + word);
+            if (s.startsWith(word)) {
+                List<String> res = helper(s.substring(word.length()), wordDict);
+                for(String s1 : res) {
+                    result.add((word + " " + s1).trim());
                 }
             }
         }
+        map.put(s, result);
+        return result;
     }
     
 }
