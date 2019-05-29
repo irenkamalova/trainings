@@ -26,6 +26,7 @@ public class WordBreakIIOffset {
         if (map.containsKey(offset)) return map.get(offset);
 
         List<String> result = new ArrayList<>();
+        // need to check all cases - can't use map
         if (offset == s.length()) {
             result.add("");
             return result;
@@ -38,6 +39,7 @@ public class WordBreakIIOffset {
                 List<String> res = find(s, dict, i + 1, map);
                 for (String subString : res) {
                     result.add((str + " " + subString).trim());
+                    // "dog" + " " + "" -> need trim extra space
                 }
             }
         }
