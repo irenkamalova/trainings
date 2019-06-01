@@ -29,29 +29,16 @@ class WraparoundString {
         return res;
     }
 
-    private boolean isWrapAround(String p, Map<String, Boolean> map) {
-        if (p.equals("")) return false;
-        String s = "abcdefghijklmnopqrstuvwxyz";
-        if (p.length() > 26) {
-            for (int i = 0; i < p.length() / 26; i++) {
-                if (!map.containsKey(p.substring(i * 26, i * 26 + 26))) {
-                    boolean answer = isWrapAround(p.substring(i * 26, i * 26 + 26), map);
-                    map.put(p.substring(i * 26, i * 26 + 26), answer);
-                    if (!answer) return false;
-                }
-            }
-            return true;
+    private boolean isWrapAround(String p) {
+        if (p.length() == 0) return false;
+        for (int i = 0; i < p.length() - 1; i++) {
+            if ( ((p.charAt(i) - 'a') + 1) % 26 != (p.charAt(i + 1) - 'a')) return false;
+            // a = 0; a -> next = a + 1 = 1, 1 % 26 = 1 == 'b' -> 'ab' -> true
+            // z = 25, z -> next = z + 1 = 26, 26 % 26 == 0 == 'a' -> 'za' -> true
         }
-
-        if (map.containsKey(p)) return map.get(p);
-
-        for (int i = 0; i < 26; i++) {
-            if (s.contains(p)) return true;
-            s = s.charAt(25) + s.substring(0, 25);
-        }
-        return false;
+        return true;
     }
-
+    
     public static void main(String[] args) {
         Solution s = new Solution();
         System.out.println(s.findSubstringInWraproundString("zab"));
