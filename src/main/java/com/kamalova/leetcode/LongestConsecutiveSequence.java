@@ -1,7 +1,12 @@
 package com.kamalova.leetcode;
 
 import java.util.*;
-
+/*
+Success
+Details 
+Runtime: 7 ms, faster than 56.55% of Java online submissions for Longest Consecutive Sequence.
+Memory Usage: 35.8 MB, less than 77.91% of Java online submissions for Longest Consecutive Sequence.
+*/
 class LongestConsecutiveSequence {
     public int longestConsecutive(int[] nums) {
         if (nums.length == 0) return 0;
