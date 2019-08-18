@@ -57,4 +57,32 @@ output: {
             }
         });
     }
+	
+    public static void main(String[] args) {
+        HashMap<String, Object> dict = new HashMap<>();
+
+        dict.put("Key1", "1");
+
+        HashMap<String, Object> key2 = new HashMap<>();
+        key2.put("a", "2");
+        key2.put("b", "3");
+        key2.put("c", "3");
+
+        HashMap<String, Object> c = new HashMap<>();
+        c.put("d", "3");
+
+        HashMap<String, Object> e = new HashMap<>();
+        e.put("", "1");
+        c.put("e", e);
+
+        key2.put("c", c);
+
+        dict.put("Key2", key2);
+
+        HashMap<String, String> stringStringHashMap = flattenDictionary(dict);
+
+        stringStringHashMap
+                .forEach((key, value) -> System.out.println(key + " : " + value));
+
+    }
 }
