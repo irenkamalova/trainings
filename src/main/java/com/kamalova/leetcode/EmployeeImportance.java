@@ -13,15 +13,7 @@ Memory Usage: 47.1 MB, less than 95.97% of Java online submissions for Employee 
 
 /*
 // Employee info
-class Employee {
-    // It's the unique id of each node;
-    // unique id of this employee
-    public int id;
-    // the importance value of this employee
-    public int importance;
-    // the id of direct subordinates
-    public List<Integer> subordinates;
-};
+
 */
 class EmployeeImportance {
     public int getImportance(List<Employee> employees, int id) {
@@ -42,6 +34,16 @@ class EmployeeImportance {
             }
         }
         return importance;
+    }
+
+    class Employee {
+        // It's the unique id of each node;
+        // unique id of this employee
+        public int id;
+        // the importance value of this employee
+        public int importance;
+        // the id of direct subordinates
+        public List<Integer> subordinates;
     }
     
 }

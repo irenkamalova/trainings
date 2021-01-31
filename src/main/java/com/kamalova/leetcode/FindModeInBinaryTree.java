@@ -4,6 +4,9 @@ package com.kamalova.leetcode;
 Easy task
 Apllyed from the first attempt
 */
+import com.kamalova.utils.TreeNode;
+
+import java.util.*;
 
 class FindModeInBinaryTree {
     Map<Integer, Integer> map = new HashMap<>();

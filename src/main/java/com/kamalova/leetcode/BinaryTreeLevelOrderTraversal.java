@@ -1,5 +1,6 @@
 package kamalova.com.leetcode;
 
+
 import java.util.*;
 
 /*
@@ -45,4 +46,15 @@ class BinaryTreeLevelOrderTraversal {
             }
         }
     }
+
+    class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+
+        TreeNode(int x) {
+            val = x;
+        }
+    }
+
 }

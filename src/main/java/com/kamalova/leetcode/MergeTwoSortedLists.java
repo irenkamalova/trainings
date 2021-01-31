@@ -9,6 +9,8 @@ Runtime: 0 ms, faster than 100.00% of Java online submissions for Merge Two Sort
 Memory Usage: 37.9 MB, less than 61.34% of Java online submissions for Merge Two Sorted Lists.
 */
 
+import com.kamalova.utils.ListNode;
+
 /**
  * Definition for singly-linked list.
  * public class ListNode {
@@ -18,7 +20,7 @@ Memory Usage: 37.9 MB, less than 61.34% of Java online submissions for Merge Two
  * }
  */
 class MergeTwoSortedLists {
-    public ListNode mergeTwoLists(ListNode l1, ListNode l2) {        
+    public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
         if (l1 == null) return l2;
         if (l2 == null) return l1;
         ListNode result;

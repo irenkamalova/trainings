@@ -9,6 +9,8 @@ Runtime: 124 ms, faster than 16.50% of Java online submissions for Merge k Sorte
 Memory Usage: 49.6 MB, less than 10.79% of Java online submissions for Merge k Sorted Lists.
 */
 
+import com.kamalova.utils.ListNode;
+
 /**
  * Definition for singly-linked list.
  * public class ListNode {

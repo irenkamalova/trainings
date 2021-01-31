@@ -5,6 +5,7 @@ Brute force, but Accepted
 Runtime: 32 ms, faster than 26.20% of Java online submissions for Sliding Window Maximum.
 Memory Usage: 41.2 MB, less than 79.46% of Java online submissions for Sliding Window Maximum.
 */
+import java.util.*;
 
 class SlidingWindowMaximum {
     public int[] maxSlidingWindow(int[] nums, int k) {
