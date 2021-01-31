@@ -30,12 +30,31 @@ public class AVLTree
 {
     public static void main(String[] args)
     {
+        example2();
+    }
+
+    public static void example1() {
         Node root = insert(null, 3);
-        insert(root, 2);
-        insert(root, 4);
-        insert(root, 5);
+        int[] intArray = new int[]{2, 4, 5};
+        for (int i : intArray)
+        {
+            root = insert(root, i);
+        }
         System.out.println(root);
         insert(root, 6);
+        System.out.println(root);
+    }
+
+    public static void example2()
+    {
+        Node root = insert(null, 14);
+        int[] intArray = new int[]{25, 21, 10, 23, 7, 26, 12, 30, 16};
+        for (int i : intArray)
+        {
+            root = insert(root, i);
+        }
+        System.out.println(root);
+        root = insert(root, 19);
         System.out.println(root);
     }
 
