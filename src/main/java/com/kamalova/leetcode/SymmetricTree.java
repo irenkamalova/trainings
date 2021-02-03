@@ -20,60 +20,27 @@ import java.util.*;
 public class SymmetricTree {
 
     public boolean isSymmetric(TreeNode root) {
-        List<Integer> right = bfsRight(root.right);
-        List<Integer> left = bfsLeft(root.left);
-        System.out.println(right);
-        System.out.println(left);
-        return right.equals(left);
-    }
-
-    Comparator<TreeNode> comparator = (o1, o2) -> {
-        if (o1 == null && o2 == null) return 0;
-        if (o1 == null) return -1;
-        return Integer.compare(o1.val, o2.val);
-    };
-
-    //boolean compare()
-
-    List<Integer> bfsRight(TreeNode root) {
-        List<Integer> list = new ArrayList<>();
-        Set<TreeNode> seen = new HashSet<>();
         Queue<TreeNode> queue = new LinkedList<>();
-        if (root != null)
-            queue.add(root);
+        queue.add(root);
+        queue.add(root);
         while (!queue.isEmpty()) {
-            TreeNode node = queue.remove();
-            if (!seen.contains(node)) {
-                list.add(node.val);
-                seen.add(node);
-                if (node.right != null)
-                    queue.add(node.right);
-                if (node.left != null)
-                    queue.add(node.left);
+            TreeNode nodeRight = queue.poll();
+            TreeNode nodeLeft = queue.poll();
+            if (nodeRight == null && nodeLeft == null) {
+                continue;
             }
-        }
-        return list;
-    }
-
-
-    List<Integer> bfsLeft(TreeNode root) {
-        List<Integer> list = new ArrayList<>();
-        Set<TreeNode> seen = new HashSet<>();
-        Queue<TreeNode> queue = new LinkedList<>();
-        if (root != null)
-            queue.add(root);
-        while (!queue.isEmpty()) {
-            TreeNode node = queue.remove();
-            if (!seen.contains(node)) {
-                list.add(node.val);
-                seen.add(node);
-                if (node.left != null)
-                    queue.add(node.left);
-                if (node.right != null)
-                    queue.add(node.right);
+            if (nodeRight == null || nodeLeft == null || nodeRight.val != nodeLeft.val) {
+                return false;
             }
+
+            queue.add(nodeRight.left);
+            queue.add(nodeLeft.right);
+            queue.add(nodeRight.right);
+            queue.add(nodeLeft.left);
+
         }
-        return list;
+        return true;
+
     }
 
 
